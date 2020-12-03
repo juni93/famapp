@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .utils import get_random_string
 from django.template.defaultfilters import slugify
+from .utils import get_random_string
 # Create your models here.
 
 
@@ -10,11 +10,17 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     email = models.EmailField(max_length=254, blank=True)
-    # avatar = models.ImageField(upload_to='avatars/', default='avatar.png')
+    avatar = models.ImageField(upload_to='avatars/', default='avatar.png')
     friends = models.ManyToManyField(User, related_name='friends', blank=True)
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+
+    def get_friends(self):
+        return self.friends.all()
+
+    def get_friends_count(self):
+        return self.friends.all().count()
 
     def __str__(self):
         return f"{self.user.username}--{self.created.strftime('%d-%m-%y')}"

@@ -4,5 +4,8 @@
       "path": "."
     }
   ],
-  "settings": {}
+  "settings": {
+    "python.pythonPath": "C:\\Users\\Juni\\.virtualenvs\\fapp-2T94zUk_\\Scripts\\python.exe",
+    "python.linting.pylintArgs": ["--generate-members"]
+  }
 }
